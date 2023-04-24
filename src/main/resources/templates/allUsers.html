@@ -10,7 +10,7 @@
 <div>
 
     <div th:each = "user : ${user}">
-        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getFirstName()}">user</a>
+        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.setName()}">user</a>
     </div>
 
     <form th:action="@{/users/new}" method="get">
