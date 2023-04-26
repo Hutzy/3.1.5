@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.security;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -14,10 +15,9 @@ public class UsersDetails implements UserDetails {
         this.user = user;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null; //коллекция ролей
+        return null;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class UsersDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.user.getName();
+        return this.user.getUsername();
     }
 
     @Override
@@ -48,5 +48,9 @@ public class UsersDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return this.user;
     }
 }

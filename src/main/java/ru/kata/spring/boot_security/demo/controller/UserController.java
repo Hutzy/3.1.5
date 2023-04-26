@@ -3,63 +3,29 @@ package ru.kata.spring.boot_security.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ru.kata.spring.boot_security.demo.service.UsersDetailsService;
 
-import javax.transaction.Transactional;
+import java.security.Principal;
 
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
-        private final UserService userService;
+        private final UsersDetailsService userService;
 
         @Autowired
-        public UserController(UserService userService) {
+        public UserController(UsersDetailsService userService) {
                 this.userService = userService;
         }
 
-        @GetMapping("/all")
-        public String startUsers(Model model) {
-                model.addAttribute("user", userService.getUsers());
-                return "allUsers";
-        }
-
-        @PostMapping()//new
-        public String createUser(@ModelAttribute("user") User user) {
-                userService.add(user);
-                return "redirect:/users/all";
-        }
-
-        @GetMapping("/new")
-        public String newUser(Model model) {
-                model.addAttribute("user", new User());
-                return "createUsers";
-        }
-
-        @DeleteMapping("/{id}")
-        public String deleteUser(@ModelAttribute("user") User user) {
-                userService.remove(user);
-                return "redirect:/users/all";
-        }
-
-        @GetMapping("/{id}/edit")
-        public String editUser(@PathVariable("id") long id, Model model) {
-                model.addAttribute("user", userService.getUser(id));
-                return "editUser";
-        }
-
-        @PatchMapping("/{id}")
-        public String editUser(@ModelAttribute("user") User user) {
-                userService.updateUser(user);
-                return "redirect:/users/all";
-        }
-
-        @GetMapping("/{id}")
-        public String currentUser(@PathVariable("id") long id, Model model) {
-                model.addAttribute("user", userService.getUser(id));
+        @GetMapping()
+        public String show(Principal principal, Model model) {
+                model.addAttribute("user", userService.getUser(principal.getName()));
                 return "userPage";
         }
+
+
 }

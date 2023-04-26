@@ -2,14 +2,18 @@ package ru.kata.spring.boot_security.demo.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
+    @Column(nullable = false)
+    private String username;
 
     @Column(nullable = false)
     private String name;
@@ -23,8 +27,12 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User(long id, String firstName, String lastName, int age, String password) {
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    private Set<Role> roles;
+
+    public User(long id,String username, String firstName, String lastName, int age, String password) {
         this.id = id;
+        this.username = username;
         this.name = firstName;
         this.surname = lastName;
         this.age = age;
@@ -33,11 +41,11 @@ public class User {
 
     public User() {}
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -73,10 +81,19 @@ public class User {
         this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
