@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,7 @@ public class UserController {
         }
 
         @GetMapping()
-        public String show(Principal principal, Model model) {
+        public String showUser (Model model, Principal principal) {
                 model.addAttribute("user", userService.getUser(principal.getName()));
                 return "userPage";
         }
