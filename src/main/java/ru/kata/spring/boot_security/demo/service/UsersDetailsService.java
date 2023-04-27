@@ -9,6 +9,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Transactional
@@ -26,16 +27,31 @@ public class UsersDetailsService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = findByUsername(username);
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException("User not Found");
-        }
-        return new User(userRepository.findByUsername(username));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Optional<User> user = findByUsername(username);
+//        if (user.isEmpty()) {
+//            throw new UsernameNotFoundException("User not Found");
+//        }
+//        return new User(userRepository.findByUsername(username));
+//    }
+    //ошибка в авторизации
+
     public User getUser(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
+
+    public void remove(User user) {
+        userRepository.deleteById(user.getId());
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
 }
 
 
@@ -49,12 +65,7 @@ public class UsersDetailsService implements UserDetailsService {
 ////    public void remove(User user) {
 ////        userRepository.deleteById(user.getId());
 ////    }
-////
-////    public List<User> getUsers() {
-////        return userRepository.findAll();
-////    }
-////
-////
+
 ////    public void updateUser(Long id, User user) {
 ////        user.setId(id);
 ////        userRepository.save(user);
