@@ -8,14 +8,13 @@
 <p></p>
 <p></p>
 <div>
-
     <div th:each = "user : ${user}">
-        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.setName()}">user</a>
+        <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.setUsername()}">user</a>
     </div>
 
-    <form th:action="@{/users/new}" method="get">
-        <button type="submit">Создать пользователя</button>
-    </form>
+<!--    <form th:action="@{/users/new}" method="get">-->
+<!--        <button type="submit">Создать пользователя</button>-->
+<!--    </form>-->
 </div>
 </body>
 </html>

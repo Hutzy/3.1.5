@@ -28,5 +28,10 @@ public class UserController {
                 return "userPage";
         }
 
+        @GetMapping("/hello")//for test
+        public String hello () {
+                return "SpringHello";
+        }
+
 
 }
