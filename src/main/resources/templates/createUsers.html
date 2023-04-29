@@ -6,16 +6,20 @@
     <title>Users</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/users}" th:object="${user}">
-    <input name="name" th:field="*{name}" id="name" type="text" />
-    &nbsp;FirstName
+<form th:method="POST" th:action="@{/admin}" th:object="${users}">
+    <input name="name" th:field="*{username}" id="name" type="text" />
+    &nbsp;Username
     <br />
-    <input name="surname" th:field="*{surname}" id="surname" type="text" />
-    &nbsp;LastName
+    <input name="surname" th:field="*{email}" id="email" type="text" />
+    &nbsp;Email
     <br />
-    <input name="age" th:field="*{age}" id="age" type="number" />
-    &nbsp;Age
+    <input name="surname" th:field="*{password}" id="password" type="text" />
+    &nbsp;Password
     <br />
+    <select th:field="*{roles}">
+        <option th:value="'2'" th:text="Admin"></option>
+        <option th:value="'1'" th:text="User"></option>
+    </select>
     <input type="submit" value="Add Person" />
 </form>
 

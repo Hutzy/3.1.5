@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,39 +13,32 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "user")
+//, uniqueConstraints = {@UniqueConstraint(columnNames = "username")}
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+//unique = true не работает :(
+
+    //@UniqueElements
+    @Column(length = 50, nullable = false, unique = true)
     private String username;
 
 
-    @Column(nullable = false, length = 3)
+    @Column(length = 50, nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    //(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
 
-
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "users_roles",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Set<Role> roles;
-
     public User() {}
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -124,5 +118,7 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
 }
 
