@@ -1,12 +1,14 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -14,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Entity
 //, uniqueConstraints = {@UniqueConstraint(columnNames = "username")}
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
+@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})//
 public class User implements UserDetails {
 
     @Id
@@ -25,12 +27,14 @@ public class User implements UserDetails {
 
     //@UniqueElements
     @Column(length = 50, nullable = false, unique = true)
+    @NotEmpty(message = "Логин не может быть пустым")
     private String username;
 
-
+    @NotEmpty(message = "email не может быть пустым")
     @Column(length = 50, nullable = false)
     private String email;
 
+    @NotEmpty(message = "password не может быть пустым")
     @Column(nullable = false)
     private String password;
 
