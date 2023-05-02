@@ -6,21 +6,24 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    @Column(nullable = false, unique = true)
+    private String rolename;
 
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
-    public Role(Long id, String name, Collection<User> users) {
+    public Role(Long id, String rolename, Collection<User> users) {
         this.id = id;
-        this.name = name;
+        this.rolename = rolename;
     }
 
     public Role() {}
@@ -33,12 +36,12 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRolename() {
+        return rolename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRolename(String rolename) {
+        this.rolename = rolename;
     }
 
     public Collection<User> getUsers() {
@@ -51,12 +54,12 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return getName();
+        return getRolename();
     }
 
     @Override
     public String toString() {
-        return name;
+        return rolename;
     }
 }
 

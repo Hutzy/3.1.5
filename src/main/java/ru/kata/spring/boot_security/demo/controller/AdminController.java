@@ -6,7 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UsersDetailsService;
+import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.service.UsersDetailsServiceImpl;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
@@ -15,20 +16,14 @@ import javax.validation.Valid;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UsersDetailsService userService;
+    private final UserService userService;
     private final UserValidator userValidator;
 
     @Autowired
-    public AdminController(UsersDetailsService userService, UserValidator userValidator) {
+    public AdminController(UserService userService, UserValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;
     }
-
-    @GetMapping("/hello") //for test
-    public String hello() {
-        return "SpringHello";
-    }
-
 
     @GetMapping("/all")
     public String startUsers(Model model) {
@@ -49,7 +44,7 @@ public class AdminController {
         return "userAdminPage";
     }
 
-    @PostMapping()//new
+    @PostMapping()
     public String newUser(@ModelAttribute("users") @Valid User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -79,10 +74,6 @@ public class AdminController {
 
     @PatchMapping("/{id}")
     public String editUser(@PathVariable("id") Long id, @ModelAttribute("user") User user) {
-//            userValidator.validate(user, bindingResult);
-//            if (bindingResult.hasErrors()) {
-//                return "editUser";
-//            }
         userService.updateUser(id, user);
         return "redirect:/admin";
     }
