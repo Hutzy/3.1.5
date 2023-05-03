@@ -16,9 +16,11 @@
   <input name="surname" th:field="*{password}" id="password" type="password" />
   &nbsp;Password
   <br />
-  <select th:field="*{roles}">
-    <option th:value="'2'" th:text="Admin"></option>
-    <option th:value="'1'" th:text="User"></option>
+  <select th:field="*{roles}" th:multiple="multiple">
+    <option th:each="role : ${roles}"
+            th:text="${role.getAuthority()}"
+            th:value="${role.id}"
+            th:selected="${user.getRoles().contains(role)}"></option>
   </select>
   <input type="submit" value="Edit User"/>
 </form>

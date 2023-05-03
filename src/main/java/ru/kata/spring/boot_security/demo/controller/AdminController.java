@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
-import ru.kata.spring.boot_security.demo.service.UsersDetailsServiceImpl;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
@@ -18,17 +18,13 @@ public class AdminController {
 
     private final UserService userService;
     private final UserValidator userValidator;
+    private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService, UserValidator userValidator) {
+    public AdminController(UserService userService, UserValidator userValidator, RoleService roleService) {
         this.userService = userService;
         this.userValidator = userValidator;
-    }
-
-    @GetMapping("/all")
-    public String startUsers(Model model) {
-        model.addAttribute("users", userService.getUsers());
-        return "allUsers";
+        this.roleService = roleService;
     }
 
     @GetMapping()
@@ -36,7 +32,6 @@ public class AdminController {
         model.addAttribute("users", userService.getUsers());
         return "allUsers";
     }
-
 
     @GetMapping("/{id}")
     public String showUser(@PathVariable("id") Long id, Model model) {
@@ -57,6 +52,7 @@ public class AdminController {
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("users", new User());
+        model.addAttribute("roles", roleService.findAll());
         return "createUsers";
     }
 
@@ -69,6 +65,7 @@ public class AdminController {
     @GetMapping("/{id}/edit")
     public String editUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUser(id));
+        model.addAttribute("roles", roleService.findAll());
         return "editUser";
     }
 

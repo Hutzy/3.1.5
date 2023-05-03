@@ -18,9 +18,10 @@
     <input name="password" th:field="*{password}" id="password" type="text" />
     &nbsp;Password
     <br />
-    <select th:field="*{roles}">
-        <option th:value="'2'" th:text="Admin"></option>
-        <option th:value="'1'" th:text="User"></option>
+    <select id="roleNames" name="roleNames" multiple>
+        <option th:each="role : ${roles}"
+                th:text="${role.authority}"
+                th:value="${role.id}"></option>
     </select>
     <input type="submit" value="Add Person" />
 </form>
