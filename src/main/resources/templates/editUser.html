@@ -20,7 +20,8 @@
     <option th:each="role : ${roles}"
             th:text="${role.getAuthority()}"
             th:value="${role.id}"
-            th:selected="${user.getRoles().contains(role)}"></option>
+            th:selected="${user.getRoles().contains(role)}">
+    </option>
   </select>
   <input type="submit" value="Edit User"/>
 </form>

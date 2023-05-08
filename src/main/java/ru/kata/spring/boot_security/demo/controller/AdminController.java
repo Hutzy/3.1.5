@@ -11,6 +11,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,19 +29,22 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String startAllUsers(Model model) {
+    public String startAllUsers(Model model, Principal principal) {
+        model.addAttribute("authuser", userService.getUser(principal.getName()));
         model.addAttribute("users", userService.getUsers());
-        return "allUsers";
+        model.addAttribute("roles", roleService.findAll());
+        return "AdminPage";
     }
 
     @GetMapping("/{id}")
     public String showUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("users", userService.getUser(id));
-        return "userAdminPage";
+        model.addAttribute("roles", roleService.findAll());
+        return "AdminPage";
     }
 
     @PostMapping()
-    public String newUser(@ModelAttribute("users") @Valid User user, BindingResult bindingResult) {
+    public String newUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/createUsers";
@@ -51,7 +55,7 @@ public class AdminController {
 
     @GetMapping("/new")
     public String newUser(Model model) {
-        model.addAttribute("users", new User());
+        model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.findAll());
         return "createUsers";
     }
