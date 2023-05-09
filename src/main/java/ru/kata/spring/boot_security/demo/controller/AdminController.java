@@ -54,7 +54,8 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
+    public String newUser(Model model, Principal principal) {
+        model.addAttribute("authuser", userService.getUser(principal.getName()));
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.findAll());
         return "createUsers";
