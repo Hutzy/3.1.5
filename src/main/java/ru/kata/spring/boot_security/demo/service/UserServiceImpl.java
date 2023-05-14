@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -23,12 +24,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUser(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found. id: " + id));
     }
 
     @Override
     public User getUser(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found. id: " + username));
     }
 
     @Transactional
