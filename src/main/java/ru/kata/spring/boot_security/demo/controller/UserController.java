@@ -29,4 +29,4 @@ public class UserController {
     public ResponseEntity<User> showUser(Principal principal) {
         return ResponseEntity.ok(userService.getUser(principal.getName()));
     }
-} //множественный вывод самого себя
+}
