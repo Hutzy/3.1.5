@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +32,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
+
 
     public User(String username, String email, String password, Set<Role> roles) {
         this.username = username;
