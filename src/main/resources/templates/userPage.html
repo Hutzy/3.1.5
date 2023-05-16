@@ -6,6 +6,17 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
     <title>ADMIN all users</title>
 </head>
 <body class="bg-light" style="height: 100vh;">
@@ -14,28 +25,28 @@
         <div class="row">
             <div class="col-6 text-white">
                 <h4>
-                    <h4 th:text="${users.email + ' with roles ' + users.getAuthorities()}"></h4>
+                    <h4> тут юия текущего юзера</h4>
                 </h4>
             </div>
             <div class="col-6 d-flex justify-content-end">
-                <form th:method="POST" th:action="@{/logout}" class="ml-auto">
-                    <button type="submit" class="btn btn-link text-white-50 content-button">Logout</button>
-                </form>
+                <a class="navbar-brand text-white-50 content-button " href="/logout">Logout</a>
             </div>
         </div>
     </div>
 </header>
+
 <section class="container-fluid h-100">
     <div class="row h-100 d-flex align-items-start">
         <div class="col-2 d-flex flex-column p-0 h-100 bg-white ">
-            <input th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-                   type="button"
-                   value="Admin"
-                   onclick="window.location.href='/admin'"
-                   class="btn btn-link bg-white text-primary aria-selected=false"
-                   style="text-align: start;"/>
-            <input type="button" value="User" onclick="window.location.href = '/user'"
-                   class="btn btn-link bg-primary mt-2 text-white aria-selected=true" style="text-align: start;"/>
+
+            <button type="button" value="" class="btn btn-link bg-white text-primary aria-selected=false button-admin"
+                    style="text-align: start; display: none">
+                <a class="navbar-brand text-primary" href="/admin/" style="text-align: start;" >Admin</a>
+            </button>
+            <button type="button" class="btn btn-link bg-primary mt-2 text-white aria-selected=true button-user"
+                    style="text-align: start; display: none">
+                <a class="navbar-brand text-white" href="/user" style="text-align: start;">User</a>
+            </button>
         </div>
         <div class="col-10 bg-light d-flex flex-column ">
             <div style="width: 90%; margin: auto;">
@@ -53,11 +64,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr class="table-secondary" th:object="${users}">
-                                <td th:text="${users.id}"></td>
-                                <td th:text="${users.username}"></td>
-                                <td th:text="${users.email}"></td>
-                                <td th:text="${users.roles}"></td>
+                            <tr class="table-secondary user__container">
+                                <td class = "user__id"></td>
+                                <td class = "user__username"></td>
+                                <td class = "user__email"></td>
+                                <td class = "user__role"></td>
                             </tr>
 
                             </tbody>
@@ -68,7 +79,6 @@
         </div>
     </div>
 </section>
-<script th:src="@{js/user.js}"></script>
-<script th:src="@{js/bootstrap.bundle.min.js}"></script>
+<script src="/static/user.js"></script>
 </body>
 </html>
