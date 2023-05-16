@@ -14,7 +14,7 @@ import ru.kata.spring.boot_security.demo.service.UsersDetailsServiceImpl;
 
 import java.security.Principal;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 

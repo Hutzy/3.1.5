@@ -1,4 +1,4 @@
-const currentUserUrl = "http://localhost:8080/api/userInfo"
+const currentUserUrl = "http://localhost:8087/user"
 const tabelBody = document.querySelector('tbody')
 let title = document.getElementById('nav-header')
 let adminTab = document.getElementById('admin-only-tab')
@@ -9,7 +9,6 @@ function fillUserData(user) {
     tempHtmlText += `<tr>
                         <td>${user.id}</td>
                         <td>${user.username}</td>
-                        <td>${user.name}</td>
                         <td>${user.email}</td>
                         <td>${rolesNames}</td>
                      </tr>`;
