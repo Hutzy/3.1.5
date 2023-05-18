@@ -1,4 +1,4 @@
-const currentUserUrl = "http://localhost:8087/user"
+const currentUserUrl = "http://localhost:8087/user/"
 const tabelBody = document.querySelector('tbody')
 let title = document.getElementById('nav-header')
 let adminTab = document.getElementById('admin-only-tab')
