@@ -1,5 +1,6 @@
 const currentUserUrl = "http://localhost:8087/user/"
-const tabelBody = document.querySelector('tbody')
+const currentUserUrl = "http://localhost:8087/user"
+const tableBody = document.querySelector('tbody')
 let title = document.getElementById('nav-header')
 let adminTab = document.getElementById('admin-only-tab')
 
@@ -12,7 +13,8 @@ function fillUserData(user) {
                         <td>${user.email}</td>
                         <td>${rolesNames}</td>
                      </tr>`;
-    tabelBody.innerHTML = tempHtmlText;
+   // tableBody.innerHTML = tempHtmlText;
+    document.getElementById('qwe').innerHTML = tempHtmlText
     filHeader(user);
 }
 
@@ -31,6 +33,4 @@ fetch(currentUserUrl, {
     .then(response => response.json())
     .then(data => {
         fillUserData(data)
-
-
     })

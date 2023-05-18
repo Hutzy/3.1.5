@@ -27,6 +27,6 @@ public class UserController {
 
     @GetMapping("/")
     public ResponseEntity<User> showUser(Principal principal) {
-        return ResponseEntity.ok(userService.getUser(principal.getName()));
+        return new ResponseEntity<>(userService.getUser(principal.getName()), HttpStatus.OK);
     }
 }

@@ -104,20 +104,9 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-//    public Set<String> getRoleNames() {
-//        Set<String> roleNames = new HashSet<>();
-//        for (Role role : roles) {
-//            String roleName = role.getAuthority().replaceAll("^\\[ROLE_(.*?)\\]$", "$1");
-//            roleNames.add(roleName);
-//        }
-//        return roleNames;
-//    }
-
     public Set<Role> getRoles() {
         return (Set<Role>) roles;
     }
-
-    //("^\\[ROLE_(.*?)\\]", "")
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;

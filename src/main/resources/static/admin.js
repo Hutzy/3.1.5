@@ -24,10 +24,7 @@ function fillUserTable(users) {
         tempHtmlText += `<tr>
                         <td>${user.id}</td>
                         <td>${user.username}</td>
-                        <td>${user.name}</td>
-                        <td>${user.lastname}</td>
                         <td>${user.email}</td>
-                        <td>${user.workplace}</td>
                         <td>${rolesNames}</td>
                         <td class="text-center"><a class="editBtn btn btn-info" id="editBtn"> edit</a></td>
                         <td class="text-center"><a class="deleteBtn btn btn-danger" id="deleteBtn"> delete</a></td>
@@ -122,10 +119,7 @@ let getUserRoles = (options) => {
 
 const id = document.getElementById('userId')
 const username = document.getElementById('username')
-const firstname = document.getElementById('firstname')
-const lastname = document.getElementById('lastname')
 const email = document.getElementById('email')
-const workplace = document.getElementById('workplace')
 const roles = document.getElementById('roles')
 const password = document.getElementById('password')
 
@@ -136,10 +130,7 @@ on(document, 'click', '.editBtn', e => {
 
     function fillForm(userData) {
         username.value = userData.username
-        firstname.value = userData.name
-        lastname.value = userData.lastname
         email.value = userData.email
-        workplace.value = userData.workplace
         password.value = userData.password
         roles.innerHTML = `
             <option value="${dbRoles[0].id}">${dbRoles[0].authorities}</option>
@@ -172,12 +163,9 @@ modalForm.addEventListener('submit', (ev) => {
         },
         body: JSON.stringify({
             id: id.value,
-            email: email.value,
-            lastname: lastname.value,
             username: username.value,
-            name: firstname.value,
+            email: email.value,
             password: password.value,
-            workplace: workplace.value,
             roles: getUserRoles(document.getElementById('roles'))
         })
     })
@@ -193,10 +181,7 @@ modalForm.addEventListener('submit', (ev) => {
  */
 const deleteUserId = document.getElementById('deleteUserId')
 const deleteUsername = document.getElementById('deleteUsername')
-const deleteFname = document.getElementById('deleteFname')
-const deleteLname = document.getElementById('deleteLname')
 const deleteEmail = document.getElementById('deleteEmail')
-const deleteWorkplace = document.getElementById('deleteWorkplace')
 const deleteRoles = document.getElementById('deleteRoles')
 const deletePassword = document.getElementById('deletePassword')
 
@@ -207,10 +192,7 @@ on(document, 'click', '.deleteBtn', e => {
 
     function fillForm(userData) {
         deleteUsername.value = userData.username
-        deleteFname.value = userData.name
-        deleteLname.value = userData.lastname
         deleteEmail.value = userData.email
-        deleteWorkplace.value = userData.workplace
         deletePassword.value = userData.password
         deleteRoles.innerHTML = `
             <option class="disabled" value="${dbRoles[0].id}">${dbRoles[0].authorities}</option>
