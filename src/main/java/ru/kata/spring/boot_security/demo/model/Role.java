@@ -17,7 +17,7 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String rolename;
+    public String rolename;
 
     @JsonBackReference
     @ManyToMany(mappedBy = "roles")
