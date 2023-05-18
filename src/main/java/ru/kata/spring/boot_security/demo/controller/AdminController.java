@@ -32,7 +32,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping()
+    @GetMapping("/")
     public ResponseEntity<List<User>> startAllUsers() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }

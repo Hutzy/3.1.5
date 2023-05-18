@@ -4,16 +4,16 @@ let title = document.getElementById('nav-header')
 let adminTab = document.getElementById('admin-only-tab')
 
 function fillUserData(user) {
-    let tempHtmlText = ''
+    let tempHtmlText = '';
     const rolesNames = user.roles.map(role => role.authorities.replace("ROLE_", "")).join(', ');
     tempHtmlText += `<tr>
-                        <td>${user.id}</td>
+                        <th scope="row">${user.id}</th>
                         <td>${user.username}</td>
                         <td>${user.email}</td>
                         <td>${rolesNames}</td>
                      </tr>`;
     tabelBody.innerHTML = tempHtmlText;
-    filHeader(user)
+    filHeader(user);
 }
 
 function filHeader(user) {
