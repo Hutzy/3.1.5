@@ -1,4 +1,4 @@
-const currentUserUrl = "http://localhost:8080/user"
+const currentUserUrl = "http://localhost:8080/user/"
 const tableBody = document.querySelector('tbody')
 let title = document.getElementById('nav-header')
 let adminTab = document.getElementById('admin-only-tab')
@@ -17,6 +17,11 @@ function fillUserData(user) {
     tableBody.innerHTML = tempHtmlText;
     filHeader(user)
 }
+
+// function filHeader(user) {
+//     const rolesNames = user.roles.map(role => role.authorities.replace("ROLE_", "")).join(', ');
+//     title.innerHTML = (' with roles: ')
+// }
 
 function filHeader(user) {
     const rolesNames = user.roles.map(role => role.authorities.replace("ROLE_", "")).join(', ');

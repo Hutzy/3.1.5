@@ -163,8 +163,8 @@ modalForm.addEventListener('submit', (ev) => {
         },
         body: JSON.stringify({
             id: id.value,
-            username: username.value,
             email: email.value,
+            username: username.value,
             password: password.value,
             roles: getUserRoles(document.getElementById('roles'))
         })
