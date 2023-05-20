@@ -146,7 +146,7 @@ on(document, 'click', '.editBtn', e => {
         console.log(roles.options.selected)
     }
 
-    fetch(usersUrl + '/' + id.value,
+    fetch(usersUrl + '' + id.value,
         {method: "GET", headers: {"Content-Type": "application/json"}})
         .then(response => response.json())
         .then(data => fillForm(data))
@@ -156,7 +156,7 @@ on(document, 'click', '.editBtn', e => {
 
 modalForm.addEventListener('submit', (ev) => {
     ev.preventDefault()
-    fetch(usersUrl + '/' + id.value, {
+    fetch(usersUrl + id.value, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
@@ -209,7 +209,7 @@ on(document, 'click', '.deleteBtn', e => {
         console.log(roles.options.selected)
     }
 
-    fetch(usersUrl + '/' + deleteUserId.value,
+    fetch(usersUrl + '' + deleteUserId.value,
         {method: "GET", headers: {"Content-Type": "application/json"}})
         .then(response => response.json())
         .then(data => fillForm(data))
@@ -220,7 +220,7 @@ on(document, 'click', '.deleteBtn', e => {
 deleteModalForm.addEventListener('submit', (ev) => {
     ev.preventDefault()
     console.log(deleteUserId.value)
-    fetch(usersUrl + '/' + deleteUserId.value, {
+    fetch(usersUrl + '' + deleteUserId.value, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

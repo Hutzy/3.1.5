@@ -31,7 +31,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @JsonManagedReference
+    //@JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Role> roles;
 

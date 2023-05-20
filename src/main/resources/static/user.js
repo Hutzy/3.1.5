@@ -18,10 +18,6 @@ function fillUserData(user) {
     filHeader(user)
 }
 
-// function filHeader(user) {
-//     const rolesNames = user.roles.map(role => role.authorities.replace("ROLE_", "")).join(', ');
-//     title.innerHTML = (' with roles: ')
-// }
 
 function filHeader(user) {
     const rolesNames = user.roles.map(role => role.authorities.replace("ROLE_", "")).join(', ');

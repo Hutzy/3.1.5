@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/admin")
+@RequestMapping("admin")
 public class AdminController {
 
     private final UserService userService;
@@ -37,12 +37,12 @@ public class AdminController {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<User> showUser(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/")
     public ResponseEntity<HttpStatus> newUser(@RequestBody User user) {
         userService.newUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -54,7 +54,7 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/edit")
+    @PatchMapping("{id}")
     public ResponseEntity<HttpStatus> editUser(@RequestBody User user, @PathVariable("id") Long id) {
         userService.updateUser(id, user);
         return new ResponseEntity<>(HttpStatus.OK);
